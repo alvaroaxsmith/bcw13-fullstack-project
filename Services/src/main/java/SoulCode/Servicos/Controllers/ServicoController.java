@@ -40,7 +40,7 @@ public class ServicoController {
 	
 	@GetMapping("/servico/{idServico}")
 	public ResponseEntity<Servico> buscarUmServico(@PathVariable Integer idServico){
-		Servico servico  = servicoService.buscarUmServico(idServico);
+		Servico servico  = servicoService.mostrarUmServico(idServico);
 		return ResponseEntity.ok().body(servico);
 		
 	}
@@ -70,6 +70,40 @@ public class ServicoController {
 		List<Servico> servicos = servicoService.buscarServicoPorIntervaloData(data1, data2);
 		return servicos;
 	}
+	
+	@GetMapping("/servicoStatus")
+	public List<Servico> buscarServicoPeloStatus(@RequestParam("status") String status){
+		List<Servico> servicos = servicoService.buscarServicoPeloStatus(status);
+		return servicos;
+	}
+	
+	@GetMapping("/servicoSemFuncionario")
+	public List<Servico> buscarServicoSemFuncionario(){
+		List<Servico> servicos = servicoService.buscarServicoSemFuncionario();
+		return servicos;
+	}
+	
+	@PostMapping("/servico")
+	public ResponseEntity<Servico> inserirServico(@RequestBody Servico servico){
+		servico = servicoService.inserirServico(servico);
+		URI novaUri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(servico.getIdServico()).toUri();
+		return ResponseEntity.created(novaUri).build();
+	}
+	
+	@PostMapping("/atribuirServico/{idServico}/{idFuncionario}")
+	public ResponseEntity<Servico> atribuirFuncionario(@PathVariable Integer idServico, @PathVariable Integer idFuncionario){
+		servicoService.atribuirFuncionario(idServico, idFuncionario);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@PostMapping("/concluirServico/{idServico}")
+	public ResponseEntity<Servico> concluirServico(@PathVariable Integer idServico){
+		servicoService.concluirServico(idServico);
+		return ResponseEntity.noContent().build();
+		
+	}
+	
 }
 
 
