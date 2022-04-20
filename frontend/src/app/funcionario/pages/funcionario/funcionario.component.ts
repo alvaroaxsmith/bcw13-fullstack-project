@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-funcionario',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FuncionarioComponent implements OnInit {
 
-  constructor() { }
+  idFuncionario!: number | null
+
+  constructor(
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.idFuncionario = parseInt(this.route.snapshot.paramMap.get('idFuncionario') || '')
   }
-
 }
