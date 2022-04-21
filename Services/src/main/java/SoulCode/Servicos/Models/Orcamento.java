@@ -27,8 +27,8 @@ public class Orcamento {
 	@Enumerated(EnumType.STRING)
 	private StatusPagamento statusPagamento;
 
-	@OneToOne
-	@JoinColumn(name = "id_servico")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_servico" )
 	private Servico servico;
 
 
