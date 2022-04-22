@@ -4,17 +4,10 @@ package SoulCode.Servicos.Controllers;
 import java.net.URI;
 import java.util.List;
 
+import SoulCode.Servicos.Repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import SoulCode.Servicos.Models.Funcionario;
@@ -28,6 +21,9 @@ public class FuncionarioController {
 	
 	@Autowired
 	FuncionarioService funcionarioService;
+
+	@Autowired
+	FuncionarioRepository funcionarioRepository;;
 	
 	@GetMapping("/funcionario")
 	public List<Funcionario> mostrarTodosFuncionarios(){
@@ -63,5 +59,23 @@ public class FuncionarioController {
 		funcionarioService.excluirFuncionario(idFuncionario);
 		return ResponseEntity.noContent().build();
 	}
-	
+
+	@GetMapping("/findByNome")
+	public List<Funcionario> findByNome(@RequestParam("nome") String nome){
+		List<Funcionario> funcionarios = funcionarioRepository.findByNome(nome);
+		return funcionarios;
+	}
+
+
+	@GetMapping("/findByIdFuncionarioAndNome")
+	public Funcionario findByIdFuncionarioAndNome(@RequestParam("id") Integer id,@RequestParam("nome") String nome){
+		Funcionario funcionarios = funcionarioRepository.findByIdFuncionarioAndNome(id, nome);
+		return funcionarios;
+	}
+
+	@GetMapping("/findByIdFuncionarioAndEmail")
+	public Funcionario findByIdFuncionarioAndEmail(@RequestParam("id") Integer id,@RequestParam("email") String email){
+		Funcionario funcionarios = funcionarioRepository.findByIdFuncionarioAndEmail(id, email);
+		return funcionarios;
+	}
 }
