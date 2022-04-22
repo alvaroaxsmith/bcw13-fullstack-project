@@ -11,6 +11,9 @@ import org.springframework.data.jpa.repository.Query;
 public interface ServicoRepository extends JpaRepository<Servico,Integer>{
 
 
+	List<Servico> findBy(Integer idFuncionario, Date data);
+
+
 	//Para a tabela de Serviços, criar um método get pelo Id do Funcionário e a data de Entrada do serviço #77
 	@Query(value = "select * from servico WHERE id_funcionario = :idFuncionario and  data_entrada = :data", nativeQuery = true)
 	List<Servico> card52(Integer idFuncionario, Date data);
@@ -24,8 +27,8 @@ public interface ServicoRepository extends JpaRepository<Servico,Integer>{
 	List<Servico> card54(Integer idFuncionario);
 
 	//Para a tabela de Serviços, criar um método get para buscar todos os serviços concluídos dentro de um intervalo de datas #80
-	@Query(value = "select * from servico WHERE status = 'CONCLUIDO'", nativeQuery = true)
-	List<Servico> card55();
+	@Query(value = "select * from servico WHERE status = 'CONCLUIDO' and (data_entrada between :dataInicio and :dataFinal)", nativeQuery = true)
+	List<Servico> card55(Date dataInicio, Date dataFinal);
 
 	//Para a tabela de Serviço, criar um método get para buscar todos os serviços concluídos de um determinado funcionário em um determinado períodi #81
 	@Query(value = "select * from servico WHERE id_funcionario = :idFuncionario and (data_entrada between :dataInicio and :dataFinal) and status = 'CONCLUIDO'", nativeQuery = true)
@@ -33,7 +36,7 @@ public interface ServicoRepository extends JpaRepository<Servico,Integer>{
 
 
 	//Para a tabela de Serviço, criar um método get para buscar todos os métodos atribuídos a um determinado funcionário a partir de determinada data #82
-	@Query(value = "select * from servico WHERE id_funcionario = :idFuncionario and (data_entrada between :dataInicio and CURRENT_DATE ()) and status = 'CONCLUIDO'", nativeQuery = true)
+	@Query(value = "select * from servico WHERE id_funcionario = :idFuncionario and (data_entrada between :dataInicio and CURRENT_DATE ()) and status = 'ATRIBUIDO'", nativeQuery = true)
 	List<Servico> card57(Integer idFuncionario, Date dataInicio);
 }
 
