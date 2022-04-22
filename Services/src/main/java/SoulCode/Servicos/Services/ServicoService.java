@@ -1,16 +1,12 @@
 package SoulCode.Servicos.Services;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import SoulCode.Servicos.Models.Funcionario;
 import SoulCode.Servicos.Models.Servico;
-import SoulCode.Servicos.Models.StatusServico;
-import SoulCode.Servicos.Repositories.FuncionarioRepository;
 import SoulCode.Servicos.Repositories.ServicoRepository;
 
 @Service
