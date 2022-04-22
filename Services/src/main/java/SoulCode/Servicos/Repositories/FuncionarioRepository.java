@@ -10,6 +10,12 @@ import SoulCode.Servicos.Models.Funcionario;
 
 @Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionario,Integer>{
+
+    List<Funcionario> findByNomeContaining(String nome);
+
+    Funcionario findByIdFuncionarioAndNome(Integer id, String nome);
+
+    Funcionario findByIdFuncionarioAndEmail(Integer id, String email);
 	
 	
 
