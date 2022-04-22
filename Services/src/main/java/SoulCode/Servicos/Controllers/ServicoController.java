@@ -36,6 +36,16 @@ public class ServicoController {
 
     }
 
+    @DeleteMapping("/servico/{idServico}")
+    public ResponseEntity<Servico> deletarUmServico(@PathVariable Integer idServico) {
+        if(!servicoRepository.existsById(idServico)){
+            return ResponseEntity.notFound().build();
+        }
+        servicoRepository.deleteById(idServico);
+        return ResponseEntity.noContent().build();
+
+    }
+
     @GetMapping("/card57")
     public List<Servico> card57(@RequestParam("idServico") Integer idServico,
                                 @RequestParam("inicial") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
