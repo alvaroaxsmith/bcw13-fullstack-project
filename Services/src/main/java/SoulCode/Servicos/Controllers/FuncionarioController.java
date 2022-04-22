@@ -46,7 +46,6 @@ public class FuncionarioController {
 		if (!funcionarioRepository.existsById(idFuncionario)){
 			ResponseEntity.notFound().build();
 		}
-
 		funcionarioRepository.deleteById(idFuncionario);
 		return ResponseEntity.noContent().build();
 	}
