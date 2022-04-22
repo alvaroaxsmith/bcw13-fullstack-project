@@ -1,49 +1,91 @@
 package SoulCode.Servicos.Controllers;
 
-import java.net.URI;
-import java.util.Date;
-import java.util.List;
-
+import SoulCode.Servicos.Models.Servico;
+import SoulCode.Servicos.Repositories.ServicoRepository;
+import SoulCode.Servicos.Services.ServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.*;
 
-import SoulCode.Servicos.Models.Funcionario;
-import SoulCode.Servicos.Models.Servico;
-import SoulCode.Servicos.Services.ServicoService;
+import java.util.Date;
+import java.util.List;
 
-@CrossOrigin 
-@RestController 
+@CrossOrigin
+@RestController
 @RequestMapping("servicos")
 public class ServicoController {
-	
-	@Autowired
-	ServicoService servicoService;
-	
-	// o método get serve para fazer buscar no banco de dados
-	@GetMapping("/servico")
-	public List<Servico> mostrarTodosServicos(){
-		List<Servico> servicos = servicoService.mostrarTodosServicos();
-		return servicos;
-	}
-	
-	@GetMapping("/servico/{idServico}")
-	public ResponseEntity<Servico> buscarUmServico(@PathVariable Integer idServico){
-		Servico servico  = servicoService.buscarUmServico(idServico);
-		return ResponseEntity.ok().body(servico);
-		
-	}
-	
-	
+
+    @Autowired
+    ServicoService servicoService;
+
+    @Autowired
+    ServicoRepository servicoRepository;
+
+    // o método get serve para fazer buscar no banco de dados
+    @GetMapping("/servico")
+    public List<Servico> mostrarTodosServicos() {
+        List<Servico> servicos = servicoService.mostrarTodosServicos();
+        return servicos;
+    }
+
+    @GetMapping("/servico/{idServico}")
+    public ResponseEntity<Servico> buscarUmServico(@PathVariable Integer idServico) {
+        Servico servico = servicoService.buscarUmServico(idServico);
+        return ResponseEntity.ok().body(servico);
+
+    }
+
+    @GetMapping("/card57")
+    public List<Servico> card57(@RequestParam("idServico") Integer idServico,
+                                @RequestParam("inicial") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                        Date inicial) {
+
+        return servicoRepository.card57(idServico, inicial);
+    }
+
+    @GetMapping("/card56")
+    public List<Servico> card56(@RequestParam("idServico") Integer idServico,
+                                @RequestParam("inicial") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                        Date inicial,
+                                @RequestParam("ultima") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                        Date ultima) {
+
+        return servicoRepository.card56(idServico, inicial, ultima);
+    }
+
+    @GetMapping("/card55")
+    public List<Servico> card55(@RequestParam("inicial") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                        Date inicial,
+                                @RequestParam("ultima") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                        Date ultima) {
+
+        return servicoRepository.card55(inicial, ultima);
+    }
+
+
+    @GetMapping("/card54")
+    public List<Servico> card54(@RequestParam("idServico") Integer idServico) {
+
+        return servicoRepository.card54(idServico);
+    }
+
+
+    @GetMapping("/card53")
+    public List<Servico> card53(@RequestParam("inicial") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                        Date inicial) {
+
+        return servicoRepository.card53(inicial);
+    }
+
+
+    @GetMapping("/card52")
+    public List<Servico> card52(@RequestParam("idServico") Integer idServico,
+                                @RequestParam("inicial") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                        Date inicial) {
+
+        return servicoRepository.card52(idServico, inicial);
+    }
+
+
 }
