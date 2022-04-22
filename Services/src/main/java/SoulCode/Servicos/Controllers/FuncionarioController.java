@@ -33,8 +33,22 @@ public class FuncionarioController {
 	
 	@GetMapping("/funcionario/{idFuncionario}")
 	public ResponseEntity<Funcionario> mostrarUmFuncionario(@PathVariable Integer idFuncionario){
+		if (!funcionarioRepository.existsById(idFuncionario)){
+			ResponseEntity.notFound().build();
+		}
 		Funcionario funcionario = funcionarioService.mostrarUmFuncionario(idFuncionario);
 		return ResponseEntity.ok().body(funcionario);
+	}
+
+
+	@DeleteMapping("/funcionario/{idFuncionario}")
+	public ResponseEntity<Funcionario> deletarUmFuncionario(@PathVariable Integer idFuncionario){
+		if (!funcionarioRepository.existsById(idFuncionario)){
+			ResponseEntity.notFound().build();
+		}
+
+		funcionarioRepository.deleteById(idFuncionario);
+		return ResponseEntity.noContent().build();
 	}
 	
 	@PostMapping("/funcionario")
