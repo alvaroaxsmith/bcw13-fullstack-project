@@ -62,16 +62,15 @@ public class FuncionarioController {
 	@PutMapping("/funcionario/{idFuncionario}")
 	public ResponseEntity<Funcionario> editarFuncionario(@PathVariable Integer idFuncionario,
 										@RequestBody Funcionario funcionario){
+		if (!funcionarioRepository.existsById(idFuncionario)){
+			ResponseEntity.notFound().build();
+		}
 		funcionario.setIdFuncionario(idFuncionario);
 		funcionario = funcionarioService.editarFuncionario(funcionario);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@DeleteMapping("funcionario/{idFuncionario}")
-	public ResponseEntity<Void> excluirFuncionario(@PathVariable Integer idFuncionario){
-		funcionarioService.excluirFuncionario(idFuncionario);
-		return ResponseEntity.noContent().build();
-	}
+
 
 	@GetMapping("/findByNome")
 	public List<Funcionario> findByNome(@RequestParam("nome") String nome){
