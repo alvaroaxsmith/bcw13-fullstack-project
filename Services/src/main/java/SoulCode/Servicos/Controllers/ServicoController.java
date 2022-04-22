@@ -31,6 +31,9 @@ public class ServicoController {
 
     @GetMapping("/servico/{idServico}")
     public ResponseEntity<Servico> buscarUmServico(@PathVariable Integer idServico) {
+        if(!servicoRepository.existsById(idServico)){
+            return ResponseEntity.notFound().build();
+        }
         Servico servico = servicoService.buscarUmServico(idServico);
         return ResponseEntity.ok().body(servico);
 
