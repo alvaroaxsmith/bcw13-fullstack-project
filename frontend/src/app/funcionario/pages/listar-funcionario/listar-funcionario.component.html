@@ -22,10 +22,11 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let fun">
-        <button mat-icon-button color="accent">
-          <mat-icon>edit</mat-icon>
+        <button mat-icon-button color="">
+          <mat-icon>edit </mat-icon>
         </button>
-        <button mat-icon-button color="warn" style="margin-left: 10px;">
+        <button mat-icon-button color="warn" style="margin-left: 10px;"
+        (click)="openDialog(fun.idFuncionario)">
           <mat-icon>delete</mat-icon>
         </button>
       </td>
@@ -33,5 +34,7 @@
 
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
+    <tr></tr>
   </table>
+  <button mat-raised-button color="accent" class="add" (click)="redirect()">Adicionar Funcionário</button>
 </div>

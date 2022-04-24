@@ -19,4 +19,9 @@ export class FuncionarioHttpService {
   getFuncionarioById(id: number): Observable<Funcionario> {
     return this.http.get<Funcionario>(`${this.baseURL}/${id}`)
   }
+  deleteFuncionarioById(id: number): Observable<Funcionario>{
+    return this.http.delete<Funcionario>(`${this.baseURL}/${id}`)
+   }
+
+
 }

@@ -2,16 +2,19 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-const routes: Routes = [
+ const routes: Routes = [
   {
-    path: 'funcionario',
-    loadChildren: () => { // Lazy Loading
-      return import('./funcionario/funcionario.module')
-      .then((m) => {
-        return m.FuncionarioModule
-      })
-    }
-  }
+      path:'funcionario',
+      loadChildren: () => import ('./funcionario/modulo/funcionario.module').then(m =>m.FuncionarioModule)
+  },
+  {
+
+      path: 'servico',
+      loadChildren: () => import('./servicos/modulo/servicos.module')
+      .then(m => m.ServicosModule)
+
+  },
+
 ]
 
 @NgModule({

@@ -1,0 +1,15 @@
+.flex-container{
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 130px;
+  margin: 0px;
+  }
+  .btn{
+    width: 100px;
+
+  }
+  .p{
+    text-align: center;
+    margin-top: 40px;
+  }
