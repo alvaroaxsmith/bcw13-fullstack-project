@@ -1,7 +1,7 @@
 package SoulCode.Servicos.Email;
 
 
-import SoulCode.Servicos.Email.envio.PacoteEnvio;
+import SoulCode.Servicos.Email.envio.Mailer;
 import SoulCode.Servicos.Email.envio.Mensagem;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -13,14 +13,14 @@ public class SpringEmailMain {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
                 SpringEmailMain.class.getPackage().getName());
 
-        PacoteEnvio mailer = applicationContext.getBean(PacoteEnvio.class);
-        mailer.enviar(new Mensagem(" Isis <isisferreira1996@gmail.com>",
-                Arrays.asList(" <isisferreira1996@gmail.com>"),"Testando .....",
-                 "Olá! \n\n O envio de e-mail deu certo!"));
+        Mailer mailer = applicationContext.getBean(Mailer.class);
+        mailer.enviar(new Mensagem("Alexandre Teste <isisferreira1996@gmail.com>",
+                Arrays.asList("Testes AlgaWorks <isisferreira1996@gmail.com>")
+                , "Aula Spring E-mail", "Olá! \n\n O envio de e-mail deu certo!"));
 
         applicationContext.close();
 
-        System.out.println("Encerrado!");
+        System.out.println("Fim!");
     }
 
 
