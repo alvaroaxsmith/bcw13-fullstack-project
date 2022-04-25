@@ -99,6 +99,4 @@ public class ServicoController {
 
         return servicoRepository.card52(idServico, inicial);
     }
-
-
 }
