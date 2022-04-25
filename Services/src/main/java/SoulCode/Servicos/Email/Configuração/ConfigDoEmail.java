@@ -12,29 +12,28 @@ import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:env/mail.properties")
-
 public class ConfigDoEmail {
 
     @Autowired
-    private Environment env;
+    private Environment envio;
 
     @Bean
     public JavaMailSender mailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
-        mailSender.setHost(env.getProperty("mail.smtp.host"));
-        mailSender.setPort(env.getProperty("mail.smtp.port", Integer.class));
-        mailSender.setUsername(env.getProperty("mail.smtp.username"));
-        mailSender.setPassword(env.getProperty("mail.smtp.password"));
+        javaMailSender.setHost(envio.getProperty("mail.smtp.host"));
+        javaMailSender.setPort(envio.getProperty("mail.smtp.port", Integer.class));
+        javaMailSender.setUsername(envio.getProperty("mail.smtp.username"));
+        javaMailSender.setPassword(envio.getProperty("mail.smtp.password"));
 
-        Properties props = new Properties();
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", true);
-        props.put("mail.smtp.starttls.enable", true);
-        props.put("mail.smtp.connectiontimeout", 10000);
+        Properties properties = new Properties();
+        properties.put("mail.transport.protocol", "smtp");
+        properties.put("mail.smtp.auth", true);
+        properties.put("mail.smtp.starttls.enable", true);
+        properties.put("mail.smtp.connectiontimeout", 10000);
 
-        mailSender.setJavaMailProperties(props);
+        javaMailSender.setJavaMailProperties(properties);
 
-        return mailSender;
+        return javaMailSender;
     }
 }
