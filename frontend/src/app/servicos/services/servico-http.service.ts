@@ -13,7 +13,7 @@ export class ServicosHttpService {
     private http: HttpClient
   ) {}
 
-  getFuncionarios(): Observable<Servicos[]> {
+  getServicos(): Observable<Servicos[]> {
     return this.http.get<Servicos[]>(this.baseURL)
   }
   getServicosById(id: number): Observable<Servicos>{
